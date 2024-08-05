@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+</head>
+<body>
+    <h1>All listings:</h1><br>
+    <% for(listing of all_listings){%>
+        <h2><%- listing.title %></h2>
+        <p><%- listing.description %></p>
+        <img src="<%- listing.image %>" alt="">
+        <h3>Price:  &#8377;<%- listing.price %></h3>
+        <p>Location: <%- listing.location %>,<%- listing.country %></p>
+    <% }%>
+</body>
+</html>
