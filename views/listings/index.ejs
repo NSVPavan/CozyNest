@@ -7,6 +7,9 @@
 </head>
 <body>
     <h1>All listings:</h1><br>
+    <form method="get" action="/listings/new">
+        <button>Create New Post</button>
+    </form>
     <ul>
         <% for(listing of all_listings){%>
            <li><a href="/listings/<%- listing._id %>"><%- listing.title %></a></li>
