@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Listing = require('./models/listing.js');
+const ejsMate= require('ejs-mate');
 const methodeOverride = require('method-override');
 const path = require('path');
 
@@ -11,6 +12,7 @@ app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodeOverride("_method"));
+app.engine("ejs",ejsMate);
 
 main().
 then(()=>{
@@ -45,7 +47,6 @@ app.get('/listings/new',(req,res)=>{
 app.get('/listings/:id',async(req,res)=>{
     let {id} = req.params;
     let listing = await Listing.findById(id);
-    console.log(listing);
     res.render("listings/show.ejs",{listing});
 });
 
