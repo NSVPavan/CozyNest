@@ -1,0 +1,26 @@
+.f-link{
+    text-decoration: none;
+    color: #222222;
+}
+.f-info div{
+    width: 100%;
+}
+.f-info{
+    padding-top:16px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height:90px;
+}
+.f-social-icons{
+    font-size: 1.2rem;
+}
+.f-social-icons a{
+    margin-right: 6px;
+}
+.f-brand{
+    font-size: 1.2rem;
+}
+.f-docs{
+    font-size: 14px;
+}

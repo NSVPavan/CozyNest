@@ -80,4 +80,14 @@ app.delete('/listings/:id',async(req,res)=>{
     let {id}=req.params;
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
-})
+});
+
+//privacy 
+app.get('/privacy',(req,res)=>{
+    res.send('Yet to be built');
+});
+
+//terms 
+app.get('/terms',(req,res)=>{
+    res.send('Yet to be built');
+});
