@@ -1,5 +1,5 @@
 .f-link{
-    text-decoration: none;
+    text-decoration: none ;
     color: #222222;
 }
 .f-info div{
@@ -23,4 +23,39 @@
 }
 .f-docs{
     font-size: 14px;
+}
+.card-container{
+    padding-left: 40px !important;
+}
+.card{
+    border:none !important;
+    /* width: 350px !important;
+    height: 450px !important; */
+}
+.card-title{
+    font-weight: bold;
+}
+.card-text{
+    margin: 0px !important;
+}
+.card-img-top{
+    object-fit: cover !important;
+    width: 100% !important;
+    border-radius: 1rem !important;
+    height: 326px !important;
+}
+.card-img-overlay{
+    opacity:0;
+    transition: background-color 0.5s 0s;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+.card-link{
+    text-decoration: none;
+    padding: 0px;
+    width: 350px !important;
+    height: 450px !important;
+    margin: 6px;
 }
