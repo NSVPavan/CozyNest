@@ -1,3 +1,16 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.body-container{
+    flex:1;
+}
+.navbar{
+    height: 80px;
+    font-size: 1.2rem;
+    margin-bottom: 50px !important;
+}
 .f-link{
     text-decoration: none ;
     color: #222222;
@@ -11,6 +24,7 @@
     flex-direction: column;
     text-align: center;
     height:90px;
+    background-color: #f7f7f7;
 }
 .f-social-icons{
     font-size: 1.2rem;
@@ -58,4 +72,14 @@
     width: 350px !important;
     height: 450px !important;
     margin: 6px;
+}
+.add-btn{
+    margin-top: 40px !important;
+}
+.red-color-bg{
+    background-color: #ff385c !important;
+    color:white !important;
+}
+.red-color-text{
+    color:#ff385c !important;
 }
