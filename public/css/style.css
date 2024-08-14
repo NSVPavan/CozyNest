@@ -83,3 +83,15 @@ body{
 .red-color-text{
     color:#ff385c !important;
 }
+.edit-btn{
+    background-color: #ff385c !important;
+    color:white !important;
+    border:none !important;
+}
+.edit-btn,.delete-btn{
+    max-width: 100px;
+}
+.show-card{
+    height:500px !important;
+    font-size: 1.4rem;
+}
