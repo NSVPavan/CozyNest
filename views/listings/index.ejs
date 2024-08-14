@@ -1,26 +1,32 @@
 <% layout("/layouts/boilerplate.ejs") -%>
 <body>
-  <h1>All listings:</h1>
-  <br />
-  <div class="card-container row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-xs-1">
-    <% for(listing of all_listings){%>
-    <a href="/listings/<%- listing._id %>" class="card-link">
+  <div class="container-fluid">
+    <h1>All listings:</h1>
+    <br />
+    <div
+      class="card-container row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-xs-1"
+    >
+      <% for(listing of all_listings){%>
+      <a href="/listings/<%- listing._id %>" class="card-link">
         <div class="card col">
-            <img
-              src="<%- listing.image %>"
-              class="card-img-top"
-              alt="Listing_image"
-            />
-            <div class="card-img-overlay"></div>
-            <div class="card-body">
-              <p class="card-text card-title"><%- listing.title %></p>
-              <p class="card-text"><%- listing.location %>, <%- listing.country %></p>
-              <p class="card-text">
-                &#8377;<%-listing.price.toLocaleString("en-In") %> night
-              </p>
-            </div>
+          <img
+            src="<%- listing.image %>"
+            class="card-img-top"
+            alt="Listing_image"
+          />
+          <div class="card-img-overlay"></div>
+          <div class="card-body">
+            <p class="card-text card-title"><%- listing.title %></p>
+            <p class="card-text">
+              <%- listing.location %>, <%- listing.country %>
+            </p>
+            <p class="card-text">
+              &#8377;<%-listing.price.toLocaleString("en-In") %> night
+            </p>
           </div>
-    </a>
-    <% }%>
+        </div>
+      </a>
+      <% }%>
+    </div>
   </div>
 </body>
