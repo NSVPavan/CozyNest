@@ -62,8 +62,6 @@ app.post('/listings',async(req,res)=>{
 //edit route
 app.get('/listings/:id/edit',async (req,res)=>{
     let {id} = req.params;
-    console.log(id);
-    console.log(req.params);
     let listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
 });
