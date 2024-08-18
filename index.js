@@ -4,6 +4,7 @@ const Listing = require('./models/listing.js');
 const ejsMate= require('ejs-mate');
 const methodeOverride = require('method-override');
 const wrapAsync =  require('./utils/wrapAsync.js');
+const ExpressError = require('./utils/ExpressError.js');
 const path = require('path');
 
 const app = express();
@@ -54,6 +55,7 @@ app.get('/listings/:id',wrapAsync(async(req,res)=>{
 
 //create route
 app.post('/listings',wrapAsync(async(req,res)=>{
+    if(!req.body.listing) throw (new ExpressError("400","Send valid data"));
     const newListing=new Listing(req.body.listing);
     await newListing.save();
     console.log("added successfully!");
@@ -69,6 +71,7 @@ app.get('/listings/:id/edit',wrapAsync(async (req,res)=>{
 
 //update route
 app.put('/listings/:id',wrapAsync(async(req,res)=>{
+    if(!req.body.listing) throw (new ExpressError("400","Send valid data"));
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
     res.redirect(`/listings/${id}`);
@@ -91,7 +94,13 @@ app.get('/terms',(req,res)=>{
     res.send('Yet to be built');
 });
 
+//path does not exist error
+app.get("*",(req,res,next)=>{
+    let err= new ExpressError("404","Page Not Found!");
+    next(err);
+})
 //error handling middleware
 app.use((err,req,res,next)=>{
-    res.send("Something went wrong!");
+    let {statusCode="500",message="Something went wrong!"} = err;
+    res.status(statusCode).send(message);
 })
