@@ -2,7 +2,7 @@
 <body>
   <div class="row offset-3">
     <div class="col-8">
-      <h2 class="mb-4">Listing Details</h2>
+      <h2 class="mb-4"><%- listing.title %></h2>
       <div class="card mt-3 show-card">
         <img
           src="<%- listing.image %>"
@@ -11,7 +11,6 @@
         />
 
         <div class="card-body">
-          <p class="card-text card-title"><%- listing.title %></p>
           <p class="card-text"><%- listing.description %></p>
           <p class="card-text">
             <%- listing.location %>, <%- listing.country %>
@@ -21,18 +20,39 @@
           </p>
         </div>
       </div>
-      <div class="row mt-5 ">
+      <div class="row mt-5">
         <div class="col-6 col-sm-4 col-md-2">
           <form action="/listings/<%- listing._id %>/edit">
             <button class="edit-btn btn btn-dark w-100">Edit</button>
           </form>
         </div>
         <div class="col-6 col-sm-4 col-md-3">
-          <form method="post" action="/listings/<%- listing.id %>?_method=DELETE">
+          <form
+            method="post"
+            action="/listings/<%- listing.id %>?_method=DELETE"
+          >
             <button class="delete-btn btn btn-dark w-100">Delete</button>
           </form>
         </div>
       </div>
+    </div>
+    <div class="col-8 mb-5 mt-3">
+      <hr>
+      <form action="#">
+        <h2>Leave a review</h2>
+        <label for="rating" class="form-label">Rating</label>
+        <input
+          type="range"
+          id="rating"
+          step="1"
+          min="1"
+          max="5"
+          class="form-range"
+        />
+        <label for="comment" class="form-label">Comments</label>
+        <textarea name="" id="comment" class="form-control" rows="5"></textarea>
+        <button class="btn btn-outline-dark mt-3">Submit</button>
+      </form>
     </div>
   </div>
 </body>
