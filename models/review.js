@@ -12,7 +12,8 @@ const reviewSchema = new Schema({
         max: 5
     },
     createdAt:{
-        type: Date
+        type: Date,
+        default: Date.now()
     }
 });
 

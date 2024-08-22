@@ -39,11 +39,12 @@
     </div>
     <div class="col-8 mb-5 mt-3">
       <hr>
-      <form action="#">
+      <form action="/listings/<%- listing._id %>/reviews" method="post">
         <h2>Leave a review</h2>
         <label for="rating" class="form-label">Rating</label>
         <input
           type="range"
+          name="review[rating]"
           id="rating"
           step="1"
           min="1"
@@ -51,7 +52,7 @@
           class="form-range"
         />
         <label for="comment" class="form-label">Comments</label>
-        <textarea name="" id="comment" class="form-control" rows="5"></textarea>
+        <textarea name="review[comment]" id="comment" class="form-control" rows="5"></textarea>
         <button class="btn btn-outline-dark mt-3">Submit</button>
       </form>
     </div>

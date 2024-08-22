@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Listing = require('./models/listing.js');
+const Review = require('./models/review.js');
 const ejsMate= require('ejs-mate');
 const methodeOverride = require('method-override');
 const wrapAsync =  require('./utils/wrapAsync.js');
@@ -106,6 +107,18 @@ app.get('/privacy',(req,res)=>{
 app.get('/terms',(req,res)=>{
     res.send('Yet to be built');
 });
+
+//reviews
+//create route
+app.post('/listings/:id/reviews',wrapAsync(async(req,res)=>{
+    let id = req.params.id;
+    let newReview = new Review(req.body.review);
+    let listing =await Listing.findById(id);
+    listing.reviews.push(newReview);
+    await newReview.save();
+    await listing.save();
+    res.redirect(`/listings/${id}`);
+}))
 
 //path does not exist error
 app.get("*",(req,res,next)=>{
