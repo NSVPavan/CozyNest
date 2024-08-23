@@ -7,6 +7,7 @@ const methodeOverride = require('method-override');
 const wrapAsync =  require('./utils/wrapAsync.js');
 const ExpressError = require('./utils/ExpressError.js');
 const {listingSchema} = require('./schema.js');
+const {reviewSchema} = require('./schema.js');
 const path = require('path');
 
 const app = express();
@@ -30,9 +31,20 @@ async function main() {
 }
 
 //schema validation 
-validateSchema=function(req,res,next){
+validateListingSchema=function(req,res,next){
     console.log(req.body);
     let {error}=listingSchema.validate(req.body);
+    console.log(error);
+    if(error){
+        let errMsg=error.details.map((el)=>el.message).join(",");
+        throw new ExpressError(400,errMsg);
+    }else{
+        next();
+    }
+}
+validateReviewSchema=function(req,res,next){
+    console.log(req.body);
+    let {error}=reviewSchema.validate(req.body);
     console.log(error);
     if(error){
         let errMsg=error.details.map((el)=>el.message).join(",");
@@ -69,7 +81,7 @@ app.get('/listings/:id',wrapAsync(async(req,res)=>{
 }));
 
 //create route
-app.post('/listings',validateSchema,wrapAsync(async(req,res)=>{
+app.post('/listings',validateListingSchema,wrapAsync(async(req,res)=>{
     const newListing=new Listing(req.body.listing);
     await newListing.save();
     console.log("added successfully!");
@@ -84,8 +96,7 @@ app.get('/listings/:id/edit',wrapAsync(async (req,res)=>{
 }));
 
 //update route
-app.put('/listings/:id',validateSchema,wrapAsync(async(req,res)=>{
-    if(!req.body.listing) throw (new ExpressError("400","Send valid data"));
+app.put('/listings/:id',validateListingSchema,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
     res.redirect(`/listings/${id}`);
@@ -110,7 +121,7 @@ app.get('/terms',(req,res)=>{
 
 //reviews
 //create route
-app.post('/listings/:id/reviews',wrapAsync(async(req,res)=>{
+app.post('/listings/:id/reviews',validateReviewSchema,wrapAsync(async(req,res)=>{
     let id = req.params.id;
     let newReview = new Review(req.body.review);
     let listing =await Listing.findById(id);
