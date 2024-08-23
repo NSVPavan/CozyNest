@@ -21,7 +21,7 @@
           </p>
         </div>
       </div>
-      <div class="row mt-5">
+      <div class="row mt-3">
         <div class="col-6 col-sm-4 col-md-2">
           <form action="/listings/<%- listing._id %>/edit">
             <button class="edit-btn btn btn-dark w-100">Edit</button>
@@ -39,7 +39,7 @@
     </div>
     <div class="col-8 mb-5 mt-3">
       <hr>
-      <form action="/listings/<%- listing._id %>/reviews" method="post">
+      <form action="/listings/<%- listing._id %>/reviews" method="post" novalidate class="needs-validation">
         <h2>Leave a review</h2>
         <label for="rating" class="form-label">Rating</label>
         <input
@@ -52,7 +52,8 @@
           class="form-range"
         />
         <label for="comment" class="form-label">Comments</label>
-        <textarea name="review[comment]" id="comment" class="form-control" rows="5"></textarea>
+        <textarea name="review[comment]" id="comment" class="form-control" rows="5" required></textarea>
+        <div class="invalid-feedback">Leave a comment</div>
         <button class="btn btn-outline-dark mt-3">Submit</button>
       </form>
     </div>
