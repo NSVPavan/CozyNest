@@ -4,23 +4,23 @@
     <h1>All listings:</h1>
     <br />
     <div
-      class="card-container row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-xs-1"
+      class="card-container listing-card-container row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-xs-1"
     >
       <% for(listing of all_listings){%>
-      <a href="/listings/<%- listing._id %>" class="card-link">
-        <div class="card col">
+      <a href="/listings/<%- listing._id %>" class="card-link listing-card-link">
+        <div class="card col listing-card">
           <img
             src="<%- listing.image %>"
-            class="card-img-top"
+            class="card-img-top listing-card-img-top"
             alt="Listing_image"
           />
-          <div class="card-img-overlay"></div>
-          <div class="card-body">
-            <p class="card-text card-title"><%- listing.title %></p>
-            <p class="card-text">
+          <div class="card-img-overlay listing-card-img-overlay"></div>
+          <div class="card-body listing-card body">
+            <p class="card-text card-title listing-card-text"><%- listing.title %></p>
+            <p class="card-text listing-card-text">
               <%- listing.location %>, <%- listing.country %>
             </p>
-            <p class="card-text">
+            <p class="card-text listing-card-text">
               &#8377;<%-listing.price.toLocaleString("en-In") %> night
             </p>
           </div>

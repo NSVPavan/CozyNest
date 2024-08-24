@@ -4,19 +4,19 @@
   <div class="row offset-3">
     <div class="col-8">
       <h2 class="mb-4"><%- listing.title %></h2>
-      <div class="card mt-3 show-card">
+      <div class="card mt-3 show-card listing-card">
         <img
           src="<%- listing.image %>"
-          class="card-img-top show-img"
+          class="card-img-top show-img listing-card-img-top"
           alt="Listing_image"
         />
 
-        <div class="card-body">
-          <p class="card-text"><%- listing.description %></p>
-          <p class="card-text">
+        <div class="card-body listing-card-body">
+          <p class="card-text listing-card-text"><%- listing.description %></p>
+          <p class="card-text listing-card-text">
             <%- listing.location %>, <%- listing.country %>
           </p>
-          <p class="card-text">
+          <p class="card-text listing-card-text">
             &#8377;<%-listing.price.toLocaleString("en-In") %> night
           </p>
         </div>
@@ -57,11 +57,17 @@
         <button class="btn btn-outline-dark mt-3">Submit</button>
       </form>
     </div>
-    <div>All reviews</div>
-    <ul>
+    <div class="row">
+      <h2>All reviews</h2>
+      
       <% for(review of listing.reviews) { %>
-        <li><%- review.comment %> (<%- review.rating %> stars)</li>
+        <div class="col-5 card review-card mb-3 mx-2">
+          <div class="card-title review-card-title">Roger</div>
+          <div class="card-text"><%- review.comment %></div>
+          <div class="card-rating"><%- review.rating %><i class="fa-solid fa-star" style="color: #FFD43B;"></i></div>
+        </div>
+        <!-- <li><%- review.comment %> (<%- review.rating %> stars)</li> -->
       <% } %>
-    </ul>
+    </div>
   </div>
 </body>

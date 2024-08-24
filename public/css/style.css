@@ -38,7 +38,7 @@ body{
 .f-docs{
     font-size: 14px;
 }
-.card-container{
+.listing-card-container{
     padding-left: 20px;
     padding-right: 20px;
     display: flex;
@@ -46,32 +46,35 @@ body{
     justify-content: space-evenly;
     /* overflow-x: hidden !important; */
 }
-.card{
+.listing-card{
     border:none !important;
     /* width: 350px !important;
     height: 450px !important; */
 }
-.card-title{
+.listing-card-title{
     font-weight: bold;
 }
-.card-text{
+.review-card-title{
+    font-weight: bold;
+}
+.listing-card-text{
     margin: 0px !important;
 }
-.card-img-top{
+.listing-card-img-top{
     object-fit: cover !important;
     width: 100% !important;
     border-radius: 1rem !important;
     height: 326px !important;
 }
-.card-img-overlay{
+.listing-card-img-overlay{
     opacity:0;
     transition: background-color 0.5s 0s;
 }
-.card-img-overlay:hover{
+.listing-card-img-overlay:hover{
     opacity: 0.2;
     background-color: white;
 }
-.card-link{
+.listing-card-link{
     text-decoration: none;
     padding: 0px;
     width: 350px !important;
