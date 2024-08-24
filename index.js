@@ -120,7 +120,7 @@ app.get('/terms',(req,res)=>{
 });
 
 //reviews
-//create route
+//review create route
 app.post('/listings/:id/reviews',validateReviewSchema,wrapAsync(async(req,res)=>{
     let id = req.params.id;
     let newReview = new Review(req.body.review);
@@ -130,6 +130,14 @@ app.post('/listings/:id/reviews',validateReviewSchema,wrapAsync(async(req,res)=>
     await listing.save();
     res.redirect(`/listings/${id}`);
 }))
+
+//review destroy route
+app.delete('/listings/:id/reviews/:reviewId',wrapAsync(async(req,res)=>{
+    let {id:listingId,reviewId}=req.params;
+    await Listing.findByIdAndUpdate(listingId,{$pull: {reviews: reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${listingId}`);
+}));
 
 //path does not exist error
 app.get("*",(req,res,next)=>{
