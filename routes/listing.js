@@ -41,6 +41,7 @@ router.post('/',validateListingSchema,wrapAsync(async(req,res)=>{
     const newListing=new Listing(req.body.listing);
     await newListing.save();
     console.log("added successfully!");
+    req.flash("success","New listing is added!");
     res.redirect('/listings');
 }));
 
@@ -55,6 +56,7 @@ router.get('/:id/edit',wrapAsync(async (req,res)=>{
 router.put('/:id',validateListingSchema,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    req.flash("success","Listing edited!");
     res.redirect(`/listings/${id}`);
 }));
 
@@ -62,6 +64,7 @@ router.put('/:id',validateListingSchema,wrapAsync(async(req,res)=>{
 router.delete('/:id',wrapAsync(async(req,res)=>{
     let {id}=req.params;
     await Listing.findByIdAndDelete(id);
+    req.flash("success","Listing deleted!")
     res.redirect("/listings");
 }));
 

@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 // Models and Utilities
 const Listing = require('./models/listing.js');
@@ -60,11 +61,18 @@ let sessionOptions ={
         httpOnly: true
     }
 };
-app.use(session(sessionOptions));
 
 // Root Route
 app.get('/', (req, res) => {
     res.send('Hi! This is the home page');
+});
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.success = req.flash("success");
+    next();
 });
 
 // Express Router for /listings
