@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const session = require('express-session');
 
 // Models and Utilities
 const Listing = require('./models/listing.js');
@@ -47,6 +48,19 @@ async function main() {
 app.listen(8080, () => {
     console.log('listening on port 8080');
 });
+
+//session creation
+let sessionOptions ={
+    secret: 'supersecretkey',
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+        expires: Date.now()+ 7*24*60*60*1000,
+        maxAge: 7*24*60*60*1000,
+        httpOnly: true
+    }
+};
+app.use(session(sessionOptions));
 
 // Root Route
 app.get('/', (req, res) => {
