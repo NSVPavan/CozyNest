@@ -22,8 +22,9 @@ const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 
 // Route Handlers
-const listings = require('./routes/listing.js');
-const reviews = require('./routes/review.js');
+const listingsRoute = require('./routes/listing.js');
+const reviewsRoute = require('./routes/review.js');
+const usersRoute = require('./routes/user.js');
 
 // Initialize express app
 const app = express();
@@ -87,10 +88,13 @@ app.use((req,res,next)=>{
 });
 
 // Express Router for /listings
-app.use("/listings", listings);
+app.use("/listings", listingsRoute);
 
 // Express Router for /reviews under specific listings
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings/:id/reviews", reviewsRoute);
+
+// Express Router for signup and login
+app.use("/", usersRoute);
 
 // Privacy Route (Yet to be built)
 app.get('/privacy', (req, res) => {
@@ -113,5 +117,5 @@ app.get("*", (req, res, next) => {
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     let { statusCode = "500", message = "Something went wrong!" } = err;
-    res.status(statusCode).render("listings/error.ejs", { message });
+    res.status(statusCode).render("error.ejs", { message });
 });
