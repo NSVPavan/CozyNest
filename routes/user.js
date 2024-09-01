@@ -10,14 +10,18 @@ router.get("/signup", (req, res) => {
 
 router.post(
   "/signup",
-  wrapAsync(async (req, res) => {
+  wrapAsync(async (req, res,next) => {
     try {
       let { email, username, password } = req.body;
       const newUser = new User({ email, username });
       let registeredUser = await User.register(newUser, password);
-      console.log(registeredUser);
-      req.flash("success", "Welcome to cozynest!");
-      res.redirect("/listings");
+      req.login(registeredUser,(err)=>{
+        if(err){
+          return next(err);
+        }
+        req.flash("success", "Welcome to cozynest!");
+        res.redirect("/listings");
+      })
     } catch (e) {
       req.flash("error", e.message);
       res.redirect("/signup");
