@@ -44,6 +44,7 @@ router.get('/:id',wrapAsync(async(req,res)=>{
 //create route
 router.post('/',isLoggedIn,validateListingSchema,wrapAsync(async(req,res)=>{
     const newListing=new Listing(req.body.listing);
+    newListing.owner = req.user._id;
     await newListing.save();
     console.log("added successfully!");
     req.flash("success","New listing is added!");
