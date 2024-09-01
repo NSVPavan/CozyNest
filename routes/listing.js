@@ -33,7 +33,7 @@ router.get('/new',isLoggedIn,(req,res)=>{
 //show route
 router.get('/:id',wrapAsync(async(req,res)=>{
     let {id} = req.params;
-    let listing = await Listing.findById(id).populate("reviews");
+    let listing = await Listing.findById(id).populate("reviews").populate("owner");
     if(!listing){
         req.flash("error","404! Listing not found.");
         res.redirect("/listings");
