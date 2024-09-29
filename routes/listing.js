@@ -5,6 +5,7 @@ const wrapAsync =  require('../utils/wrapAsync.js');
 const ExpressError = require('../utils/ExpressError.js');
 const {listingSchema} = require('../schema.js');
 const {isLoggedIn} = require('../middleware.js');
+const {isOwner} = require("../middleware.js");
 //schema validation 
 validateListingSchema=function(req,res,next){
     console.log(req.body);
@@ -52,7 +53,7 @@ router.post('/',isLoggedIn,validateListingSchema,wrapAsync(async(req,res)=>{
 }));
 
 //edit route
-router.get('/:id/edit',isLoggedIn,wrapAsync(async (req,res)=>{
+router.get('/:id/edit',isLoggedIn,isOwner,wrapAsync(async (req,res)=>{
     let {id} = req.params;
     let listing = await Listing.findById(id);
     if(!listing){
@@ -63,7 +64,7 @@ router.get('/:id/edit',isLoggedIn,wrapAsync(async (req,res)=>{
 }));
 
 //update route
-router.put('/:id',isLoggedIn,validateListingSchema,wrapAsync(async(req,res)=>{
+router.put('/:id',isLoggedIn,isOwner,validateListingSchema,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
     req.flash("success","Listing edited!");
@@ -71,7 +72,7 @@ router.put('/:id',isLoggedIn,validateListingSchema,wrapAsync(async(req,res)=>{
 }));
 
 //destroy route
-router.delete('/:id',isLoggedIn,wrapAsync(async(req,res)=>{
+router.delete('/:id',isLoggedIn,isOwner,wrapAsync(async(req,res)=>{
     let {id}=req.params;
     await Listing.findByIdAndDelete(id);
     req.flash("success","Listing deleted!")
