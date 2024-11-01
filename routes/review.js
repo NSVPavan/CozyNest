@@ -10,6 +10,8 @@ const {isLoggedIn} = require('../middleware.js');
 router.post('/',isLoggedIn,validateReviewSchema,wrapAsync(async(req,res)=>{
     let id = req.params.id;
     let newReview = new Review(req.body.review);
+    newReview.author = req.user._id;
+    let listing =await Listing.findById(id);
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();
