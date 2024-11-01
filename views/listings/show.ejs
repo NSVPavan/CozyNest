@@ -41,6 +41,7 @@
       <% } %>
     </div>
     <div class="col-8 mb-5 mt-3">
+      <% if(currUser){ %>
       <hr>
       <form action="/listings/<%- listing._id %>/reviews" method="post" novalidate class="needs-validation">
         <h2>Leave a review</h2>
@@ -59,6 +60,7 @@
         <div class="invalid-feedback">Please leave a comment</div>
         <button class="btn btn-outline-dark mt-3">Submit</button>
       </form>
+      <% } %>
     </div>
     <div class="row">
       <h2>All reviews</h2>

@@ -4,13 +4,12 @@ const Review = require('../models/review.js');
 const wrapAsync =  require('../utils/wrapAsync.js');
 const Listing = require('../models/listing.js');
 const {validateReviewSchema} = require('../middleware.js');
-
+const {isLoggedIn} = require('../middleware.js');
 //reviews
 //review create route
-router.post('/',validateReviewSchema,wrapAsync(async(req,res)=>{
+router.post('/',isLoggedIn,validateReviewSchema,wrapAsync(async(req,res)=>{
     let id = req.params.id;
     let newReview = new Review(req.body.review);
-    let listing =await Listing.findById(id);
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();
