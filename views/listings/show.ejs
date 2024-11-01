@@ -67,7 +67,7 @@
       
       <% for(review of listing.reviews) { %>
         <div class="col-5 card review-card mb-3 mx-2">
-          <div class="card-title review-card-title">Roger</div>
+          <div class="card-title review-card-title"><%- review.author.username  %></div>
           <div class="card-text"><%- review.comment %></div>
           <div class="card-rating"><%- review.rating %><i class="fa-solid fa-star" style="color: #FFD43B;"></i></div>
           <form action="/listings/<%- listing._id %>/reviews/<%- review._id %>?_method=DELETE" method="post">
