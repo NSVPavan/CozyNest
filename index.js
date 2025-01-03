@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV!='production'){
+    require('dotenv').config();
+}
+ 
 // Required dependencies
 const express = require('express');
 const mongoose = require('mongoose');
@@ -113,7 +117,7 @@ app.get('/terms', (req, res) => {
 
 // Handle non-existent routes (404)
 app.get("*", (req, res, next) => {
-    let err = new ExpressError("404", "Page Not Found!");
+    let err = new ExpressError(404, "Page Not Found!");
     next(err);
 });
 

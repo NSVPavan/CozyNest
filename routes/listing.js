@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const multer  = require('multer');
+const {storage} = require('../cloudinary_config.js');
+const upload = multer({storage});
 
 const wrapAsync = require("../utils/wrapAsync.js");
 const { isLoggedIn } = require("../middleware.js");
@@ -12,6 +15,7 @@ router
   .get(wrapAsync(listingController.index))
   .post(
     isLoggedIn,
+    upload.single('listing[image]'),
     validateListingSchema,
     wrapAsync(listingController.createListing)
   );
