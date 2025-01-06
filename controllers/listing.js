@@ -41,11 +41,13 @@ module.exports.createListing = async (req, res) => {
 module.exports.editListing = async (req, res) => {
   let { id } = req.params;
   let listing = await Listing.findById(id);
+  let original_image_url=listing.image.url;
+  original_image_url=original_image_url.replace("/upload","/upload/h_300");
   if (!listing) {
     req.flash("error", "404! Listing not found.");
     res.redirect("/listings");
   }
-  res.render("listings/edit.ejs", { listing });
+  res.render("listings/edit.ejs", { listing,original_image_url });
 };
 
 //update route
