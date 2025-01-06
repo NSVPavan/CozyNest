@@ -30,8 +30,9 @@ router
   .put(
     isLoggedIn,
     isOwner,
-    validateListingSchema,
-    wrapAsync(listingController.updateListing)
+    upload.single('listing[image]'),
+    wrapAsync(listingController.updateListing),
+    validateListingSchema
   )
   .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
 

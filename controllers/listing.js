@@ -51,6 +51,12 @@ module.exports.editListing = async (req, res) => {
 //update route
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
+  if(req.file){
+    let url=req.file.path;
+    let filename=req.file.filename;
+    let image={url,filename};
+    await Listing.findByIdAndUpdate(id,{image});
+  }
   await Listing.findByIdAndUpdate(id, { ...req.body.listing });
   req.flash("success", "Listing edited!");
   res.redirect(`/listings/${id}`);
