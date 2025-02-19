@@ -1,7 +1,98 @@
 <% layout("/layouts/boilerplate.ejs") -%>
+<style>
+  #filters{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 40px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+  }
+  .filter{
+    text-align: center;
+    margin-left: 40px;
+    opacity: 0.7;
+  }
+  .filter:nth-child(1){
+    margin-left: 20px;
+  }
+  .filter:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+  .filter p{
+    font-size: 0.8rem;
+  }
+  .filter i{
+    font-size: 1.2rem;
+  }
+  #taxcheck{
+    display: flex;
+    border: 1px solid black;
+    border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-left: 140px;
+    height: 50px;
+    width: 250px;
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+  }
+  .tax{
+    display: none;
+  }
+</style>
 <body>
+  <div id="filters">
+    <div class="filter">
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-mountain-city"></i>
+      <p>Iconic cities</p>
+    </div>
+    <div class="filter">
+      <i class="fa-brands fa-fort-awesome"></i>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-person-swimming"></i>
+      <p>Amazing pools</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-tent"></i>
+      <p>Camps</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-cow"></i>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-snowman"></i>
+      <p>Arctic</p>
+    </div>
+    <div class="filter">
+        <i class="fa-solid fa-igloo"></i>
+        <p>Domes</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-sailboat"></i>
+      <p>Boats</p>
+    </div>
+    <div id="taxcheck">
+      <div class="form-check-reverse form-switch">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      </div>
+    </div>
+    
+  </div>
   <div class="container-fluid">
-    <h1>All listings:</h1>
     <br />
     <div
       class="card-container listing-card-container row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-xs-1"
@@ -22,6 +113,7 @@
             </p>
             <p class="card-text listing-card-text">
               &#8377;<%-listing.price.toLocaleString("en-In") %> night
+              &nbsp;&nbsp;<i class="tax">+18% after GST</i>
             </p>
           </div>
         </div>
@@ -30,3 +122,17 @@
     </div>
   </div>
 </body>
+
+<script>
+  let taxswitch = document.getElementById("flexSwitchCheckDefault");
+  let taxes = document.getElementsByClassName("tax");
+  taxswitch.addEventListener("click",()=>{
+      for(tax of taxes){
+        if(tax.style.display!="inline"){
+          tax.style.display="inline";
+        }else{
+          tax.style.display="none";
+        }
+      }
+  });
+</script>
