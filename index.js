@@ -33,6 +33,7 @@ const usersRoute = require('./routes/user.js');
 // Initialize express app
 const app = express();
 const MONGO_URL = "mongodb://127.0.0.1:27017/cozynest";
+const DB_URL = process.env.ATLASDB_URL;
 
 // Set EJS as view engine and configure views directory
 app.set("view engine", "ejs");
@@ -50,7 +51,7 @@ main().then(() => {
 }).catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(DB_URL);
 }
 
 // Start the server
