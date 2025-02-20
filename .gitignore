@@ -1,3 +1,4 @@
 .env
 init/
 node_modules/
+**/.DS_Store

@@ -7,6 +7,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -32,7 +33,6 @@ const usersRoute = require('./routes/user.js');
 
 // Initialize express app
 const app = express();
-const MONGO_URL = "mongodb://127.0.0.1:27017/cozynest";
 const DB_URL = process.env.ATLASDB_URL;
 
 // Set EJS as view engine and configure views directory
@@ -59,9 +59,21 @@ app.listen(8080, () => {
     console.log('listening on port 8080');
 });
 
+const store = MongoStore.create({
+    mongoUrl:DB_URL,
+    crypto:{
+        secret:process.env.SECRET
+    },
+    touchAfter: 24*3600
+});
+
+store.on("error",()=>{
+    console.error("Error in mongo session store",err);
+})
 //session creation
 let sessionOptions ={
-    secret: 'supersecretkey',
+    store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie:{
