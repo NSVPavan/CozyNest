@@ -3,8 +3,7 @@
 CozyNest is a full-stack web application that enables users to list, discover, and review rental properties and accommodations. Inspired by platforms like Airbnb, CozyNest provides an intuitive interface for property owners to create listings and for guests to browse, review, and book stays.
 
 <p align="center">
-  <!-- Replace the src URL with your screenshot/image link -->
-  ![Screenshot 2025-06-08 171915](https://github.com/user-attachments/assets/33c3c25d-1ae2-4869-a05e-110d1b18ab3e)
+  <img src="https://github.com/user-attachments/assets/33c3c25d-1ae2-4869-a05e-110d1b18ab3e" alt="Screenshot 2025-06-08 171915" width="600"/>
 </p>
 
 > **Live Demo:** [cozynest-1.onrender.com/listings](cozynest-1.onrender.com/listings) <!-- Replace with your actual live link -->
